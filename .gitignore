@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data (re-downloadable from Kaggle)
+data/
+data_kth/
+
+# Large binaries (use Git LFS if pushing: git lfs track "*.pth" "*.pt")
+*.pth
+*.pt
+!checkpoints/.gitkeep
+
+# Outputs
+*.mp4
+*.avi
+output_pred.mp4
+yolo_action_pred.jpg
+confusion_matrix.png
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

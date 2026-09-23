@@ -1,0 +1,7 @@
+data/
+data_kth/
+__pycache__/
+*.pyc
+*.avi
+*.mp4
+.git/
