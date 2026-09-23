@@ -1,0 +1,14 @@
+[Unit]
+Description=ActionScope human action detection app
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=%h/HumanActionDetection
+Environment=SKIP_3D=1
+ExecStart=%h/HumanActionDetection/.venv/bin/python -m src.app --port 7860
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
