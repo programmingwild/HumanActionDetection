@@ -5,8 +5,8 @@
   "portsAttributes": {
     "7860": { "label": "ActionScope app", "onAutoForward": "notify", "visibility": "public" }
   },
-  "postCreateCommand": "pip install --quiet torch torchvision --index-url https://download.pytorch.org/whl/cpu && pip install --quiet -r requirements.txt && pip install --quiet 'numpy<2'",
-  "postStartCommand": "nohup python -m src.app --port 7860 > app.log 2>&1 &",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/serve.sh",
   "customizations": {
     "vscode": { "extensions": ["ms-python.python"] }
   }
