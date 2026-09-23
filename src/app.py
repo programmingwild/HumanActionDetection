@@ -46,6 +46,12 @@ except Exception as e:
 
 print("Loading 3D video model...")
 import os
+from pathlib import Path
+
+
+def _existing(paths):
+    """Examples that actually exist (data/ isn't pushed to Spaces)."""
+    return [p for p in paths if Path(p).exists()]
 if os.environ.get("SKIP_3D") == "1":
     print("SKIP_3D=1 — skipping 3D model (lite/CPU deployment).")
     model3d, classes3d, tf3d = None, None, None
@@ -362,8 +368,8 @@ with gr.Blocks(title="ActionScope — Human Action Detection") as demo:
         with gr.Row():
             btn_img = gr.Button("Classify action", variant="primary")
             clr_img = gr.ClearButton(inp, value="Clear")
-        gr.Examples(examples=["data/test/cycling/Image_10739.jpg",
-                              "data/test/dancing/Image_10758.jpg"],
+        gr.Examples(examples=_existing(["data/test/cycling/Image_10739.jpg",
+                                          "data/test/dancing/Image_10758.jpg"]),
                     inputs=inp, label="Tap an example")
         btn_img.click(classify_image, inp, [out, banner])
         inp.change(classify_image, inp, [out, banner])
@@ -381,7 +387,7 @@ with gr.Blocks(title="ActionScope — Human Action Detection") as demo:
         with gr.Row():
             btn_det = gr.Button("Detect people", variant="primary")
             clr_det = gr.ClearButton(inp2, value="Clear")
-        gr.Examples(examples=["data/test/cycling/Image_10739.jpg"], inputs=inp2,
+        gr.Examples(examples=_existing(["data/test/cycling/Image_10739.jpg"]), inputs=inp2,
                     label="Tap an example")
         btn_det.click(detect_image, [inp2, conf_slider], [out2, summary, people_table])
         inp2.change(detect_image, [inp2, conf_slider], [out2, summary, people_table])
@@ -398,8 +404,8 @@ with gr.Blocks(title="ActionScope — Human Action Detection") as demo:
         with gr.Row():
             btn_vid = gr.Button("Classify clip", variant="primary")
             clr_vid = gr.ClearButton(inp3, value="Clear")
-        gr.Examples(examples=["data_kth/boxing/person01_boxing_d1_uncomp.avi"], inputs=inp3,
-                    label="Tap an example")
+        gr.Examples(examples=_existing(["data_kth/boxing/person01_boxing_d1_uncomp.avi"]),
+                    inputs=inp3, label="Tap an example")
         btn_vid.click(classify_video_clip, inp3, [out3, banner3])
         inp3.change(classify_video_clip, inp3, [out3, banner3])
 
