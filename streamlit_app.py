@@ -18,7 +18,8 @@ st.set_page_config(page_title="ActionScope — Human Action Detection", layout="
 CSS = """
 <style>
 @import url('https://fonts.cdnfonts.com/css/product-sans');
-html, body, [class*="st-"] { font-family: 'Product Sans','Google Sans',sans-serif !important; }
+html, body, .stApp { font-family: 'Product Sans','Google Sans',sans-serif; }
+[data-testid="stFileUploader"] button { white-space: nowrap; }
 :root { --accent: #c9a25e; }
 .topbar { display:flex; justify-content:space-between; align-items:center;
   padding: 6px 2px 14px 2px; border-bottom:1px solid #26262b; margin-bottom:18px; }
