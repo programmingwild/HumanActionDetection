@@ -1,17 +1,9 @@
-# Base install (CPU torch works; CUDA build recommended for NVIDIA GPUs):
-#   pip install --force-reinstall --no-cache-dir "torch==2.11.0+cu128" "torchvision==0.26.0+cu128" --index-url https://download.pytorch.org/whl/cu128
-#   pip install "numpy<2"   # sklearn/scipy compat
-torch>=2.2
-torchvision>=0.17
-opencv-python>=4.8
-"numpy<2"  # numpy 2.x breaks scikit-learn/scipy builds
+# Default (slim, CPU-only): Streamlit Cloud free tier + local CPU runs.
+# Torch-free inference via onnxruntime (~400MB RAM total).
+# For GPU training locally, use requirements-gpu.txt instead.
+streamlit>=1.30
+onnxruntime>=1.17
+numpy<2
 pillow>=10.0
-tqdm>=4.66
-scikit-learn>=1.3
-matplotlib>=3.8
+opencv-python-headless>=4.8
 pandas>=2.0
-kaggle>=1.6
-kagglehub>=0.2
-ultralytics>=8.0  # YOLOv8 person detector for detection + action head
-gradio>=4.0  # web demo app (python -m src.app)
-fpdf2>=2.0  # PDF report builder (python docs/build_report.py)
