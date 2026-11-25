@@ -248,7 +248,7 @@ def read_frames(path, clip_len=16):
 NAV = '''<div class="nav">
   <div class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/></svg></span>
     <span><b>ACTIONSCOPE<sup>®</sup></b><small>Human action studio</small></span></div>
-  <div class="nav-links"><span class="on">01 Still</span><span>02 Detect</span><span>03 Motion</span></div>
+  <div class="nav-links"><a href="#chapter-01" class="on">01 Still</a><a href="#chapter-02">02 Detect</a><a href="#chapter-03">03 Motion</a></div>
   <div class="nav-status"><span class="live"><i class="pulse"></i>System online</span><span>ONNX · CPU</span></div>
 </div>'''
 
@@ -256,7 +256,7 @@ HERO = '''<section class="hero"><div class="eyebrow"><i></i>Computer vision stud
 <div class="hero-grid"><div>
   <h1><span class="row">Action</span><span class="row">is the <svg class="spin-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/></svg></span><span class="row"><em>signal.</em></span></h1>
   <p>Three vision systems, one studio. <b>Read stills. Find every body. Follow motion through time.</b> Torch-free on ONNX Runtime, tuned for the free tier.</p>
-  <div class="cta-row"><span class="btn acid">Start analysing &nbsp;↘</span><span class="btn">ONNX · CPU · live</span></div>
+  <div class="cta-row"><a class="btn acid" href="#chapter-01">Start analysing &nbsp;↘</a><a class="btn" href="#how">How it works &nbsp;→</a></div>
 </div><div class="orb"><div class="orb-glow"></div><div class="orb-dashed"></div><div class="orb-ring"></div>
   <div class="orb-core"><div class="orb-num">86.0<small>%</small></div><div class="orb-cap">Image top-1</div></div>
   <div class="chip c1"><i></i>YOLOv8n</div><div class="chip c2"><i></i>B0 + B3</div>
@@ -297,7 +297,7 @@ CH3 = chapter(3, "Chapter 03 — Motion", "Follow the <em>movement.</em>",
               "one clip at a time. Short, single-action clips work best.",
               [("Model", "R3D-18"), ("Frames", "16"), ("Classes", "6"), ("Val", "91.6 %")])
 
-HOW = '''<section class="how"><div class="how-title"><div class="how-kick">Field notes — the machinery</div>
+HOW = '''<section class="how" id="how"><div class="how-title"><div class="how-kick">Field notes — the machinery</div>
 <h3>How it <em>works.</em></h3><p>Three heads, one pipeline. Every prediction below is measured, not projected.</p></div>
 <div class="how-grid">
   <div class="how-item"><div class="n">01 / Still</div><b>EfficientNet B0 + B3</b>

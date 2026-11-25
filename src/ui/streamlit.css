@@ -44,8 +44,12 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;o
 .logo b sup{font-size:7px;vertical-align:top;margin-left:2px}
 .logo small{display:block;font:400 10px/1.6 var(--mono);letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 .nav-links{display:flex;gap:4px;background:rgba(242,238,228,.04);border:1px solid var(--line);border-radius:999px;padding:5px}
-.nav-links span{font:400 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:9px 14px}
-.nav-links span.on{color:#0a0a0a;background:var(--acid);border-radius:999px}
+.nav-links a{font:400 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:9px 14px;text-decoration:none;border-radius:999px;transition:.25s}
+.nav-links a:hover{color:var(--paper);background:rgba(242,238,228,.06)}
+body:not(:has(.chapter:target)) .nav-links a.on{color:#0a0a0a;background:var(--acid)}
+body:has(#chapter-01:target) .nav-links a[href="#chapter-01"],
+body:has(#chapter-02:target) .nav-links a[href="#chapter-02"],
+body:has(#chapter-03:target) .nav-links a[href="#chapter-03"]{color:#0a0a0a;background:var(--acid)}
 .nav-status{display:flex;align-items:center;gap:12px;font:400 10px/1 var(--mono);letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 .nav-status .live{display:flex;align-items:center;gap:7px;color:var(--paper)}
 .pulse{width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 0 rgba(215,255,63,.6);animation:pulse 2s infinite}
@@ -65,7 +69,7 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;o
 .hero p{max-width:520px;margin:32px 0 0;color:var(--muted);font-size:16.5px;line-height:1.65;animation:fadeup 1s .12s both}
 .hero p b{color:var(--paper);font-weight:500}
 .cta-row{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;animation:fadeup 1s .18s both}
-.btn{padding:15px 22px;border-radius:999px;font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line-strong);color:var(--paper);background:transparent}
+.btn{display:inline-block;padding:15px 22px;border-radius:999px;font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line-strong);color:var(--paper);background:transparent;text-decoration:none;transition:.25s}
 .btn.acid{background:var(--acid);color:#080808;border-color:var(--acid)}
 .hero-base{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:52px;padding-top:22px;border-top:1px solid var(--line);
   font:400 10px/1.8 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
@@ -110,7 +114,8 @@ body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;o
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 /* chapter */
-.chapter{display:grid;grid-template-columns:170px 1fr 290px;gap:34px;padding:100px 0 40px;border-top:1px solid var(--line);align-items:start}
+.chapter{display:grid;grid-template-columns:170px 1fr 290px;gap:34px;padding:100px 0 40px;border-top:1px solid var(--line);align-items:start;scroll-margin-top:84px}
+.how{scroll-margin-top:84px}
 .ch-num{font-size:clamp(74px,8vw,124px);line-height:.72;letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1px var(--line-strong);font-weight:400}
 .ch-kick{font:400 10px/1 var(--mono);letter-spacing:.22em;color:var(--acid);text-transform:uppercase;margin-bottom:18px}
 .ch-main h2{margin:0;font-size:clamp(42px,5.4vw,84px);line-height:.9;letter-spacing:-.045em;font-weight:500;text-transform:uppercase}
