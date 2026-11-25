@@ -258,7 +258,7 @@ HERO = '''<section class="hero"><div class="eyebrow"><i></i>Computer vision stud
   <p>Three vision systems, one studio. <b>Read stills. Find every body. Follow motion through time.</b> Torch-free on ONNX Runtime, tuned for the free tier.</p>
   <div class="cta-row"><a class="btn acid" href="#chapter-01">Start analysing &nbsp;↘</a><a class="btn" href="#how">How it works &nbsp;→</a></div>
 </div><div class="orb"><div class="orb-glow"></div><div class="orb-dashed"></div><div class="orb-ring"></div>
-  <div class="orb-core"><div class="orb-num">86.0<small>%</small></div><div class="orb-cap">Image top-1</div></div>
+  <div class="orb-core"><div class="orb-num">86.9<small>%</small></div><div class="orb-cap">Image top-1</div></div>
   <div class="chip c1"><i></i>YOLOv8n</div><div class="chip c2"><i></i>B0 + B3</div>
   <div class="chip c3"><i></i>R3D-18</div><div class="chip c4"><i></i>ONNX live</div>
 </div></div>
@@ -267,7 +267,7 @@ HERO = '''<section class="hero"><div class="eyebrow"><i></i>Computer vision stud
 
 STATS = '''<section class="stats">
 <div class="stat"><i>[01]</i><b>15</b><span>Everyday actions</span></div>
-<div class="stat"><i>[02]</i><b>86.0<small>%</small></b><span>Image top-1 · ensemble</span></div>
+<div class="stat"><i>[02]</i><b>86.9<small>%</small></b><span>Image top-1 · ensemble</span></div>
 <div class="stat"><i>[03]</i><b>91.6<small>%</small></b><span>Video validation · R3D-18</span></div>
 <div class="stat"><i>[04]</i><b>16<small>f</small></b><span>Frames per motion clip</span></div></section>'''
 
@@ -287,7 +287,7 @@ def chapter(n, kicker, title, copy, meta):
 CH1 = chapter(1, "Chapter 01 — Still image", "Read the <em>moment.</em>",
               "Two EfficientNet heads read a single frame and place it across fifteen everyday actions "
               "— from cycling to sleeping. Drop a photo; the ensemble answers in milliseconds.",
-              [("Classes", "15"), ("Backbone", "B0 + B3"), ("Input", "224 / 300 px"), ("Top-1", "86.0 %")])
+              [("Classes", "15"), ("Backbone", "B0 + B3"), ("Input", "224 / 300 px"), ("Top-1", "86.9 %")])
 CH2 = chapter(2, "Chapter 02 — Detection", "Find every <em>body.</em>",
               "YOLOv8n locates each person, then the action head labels every crop independently. "
               "Crowds, couples, passing strangers — everyone gets their own read.",
@@ -310,7 +310,7 @@ HOW = '''<section class="how" id="how"><div class="how-title"><div class="how-ki
     <div><b>Image data</b>HAR-15 · 10,710 train / 1,890 test</div>
     <div><b>Video data</b>KTH · 600 clips · 6 classes</div>
     <div><b>Runtime</b>ONNX Runtime · Streamlit Cloud · CPU</div>
-    <div><b>Reported</b>86.0 % image · 91.6 % video</div></div>
+    <div><b>Reported</b>86.9 % image · 91.6 % video</div></div>
 </div></section>'''
 
 FOOTER = '''<div class="site-footer"><div class="foot-word">ActionScope</div>

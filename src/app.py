@@ -523,7 +523,7 @@ HERO = f"""
       <div class="orb-ring"></div>
       <div class="orb-scan"></div>
       <div class="orb-core">
-        <div class="orb-num">86.0<small>%</small></div>
+        <div class="orb-num">86.9<small>%</small></div>
         <div class="orb-cap">Image top-1</div>
       </div>
       <div class="chip c1"><i></i>YOLOv8n</div>
@@ -543,7 +543,7 @@ HERO = f"""
 STATS = """
 <section class="stats">
   <div class="stat"><i>[01]</i><b data-count="15" data-decimals="0">15</b><span>Everyday actions</span></div>
-  <div class="stat"><i>[02]</i><b data-count="86.0" data-decimals="1" data-suffix="%">86.0%</b><span>Image top-1 · ensemble</span></div>
+  <div class="stat"><i>[02]</i><b data-count="86.9" data-decimals="1" data-suffix="%">86.9%</b><span>Image top-1 · ensemble</span></div>
   <div class="stat"><i>[03]</i><b data-count="91.6" data-decimals="1" data-suffix="%">91.6%</b><span>Video validation · R3D-18</span></div>
   <div class="stat"><i>[04]</i><b data-count="16" data-decimals="0" data-suffix="f">16f</b><span>Frames per motion clip</span></div>
 </section>
@@ -580,7 +580,7 @@ CH01 = chapter(
     "01", "Chapter 01 — Still image", "Read the <em>moment.</em>",
     "Two EfficientNet heads read a single frame and place it across fifteen everyday "
     "actions — from cycling to sleeping. Drop a photo; the ensemble answers in milliseconds.",
-    [("Classes", "15"), ("Backbone", "B0 + B3"), ("Input", "300 px"), ("Top-1", "86.0 %")],
+    [("Classes", "15"), ("Backbone", "B0 + B3"), ("Input", "300 px"), ("Top-1", "86.9 %")],
 )
 CH02 = chapter(
     "02", "Chapter 02 — Detection", "Find every <em>body.</em>",
@@ -667,7 +667,7 @@ HOW = f"""
       <div><b>Image data</b>HAR-15 · 10,710 train / 1,890 test</div>
       <div><b>Video data</b>KTH · 600 clips · 25 fps · 6 classes</div>
       <div><b>Runtime</b>PyTorch 2.11 · CUDA 12.8 · Gradio 6</div>
-      <div><b>Reported</b>86.0 % image · 91.6 % video</div>
+      <div><b>Reported</b>86.9 % image · 91.6 % video</div>
     </div>
   </div>
 </section>

@@ -11,14 +11,17 @@ import argparse
 import json
 import random
 
+from pathlib import Path
+
 import numpy as np
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader, WeightedRandomSampler
 from tqdm import tqdm
 
 from .config import (
     ARCH, BATCH_SIZE, CHECKPOINT_DIR, CHECKPOINT_PATH, CLASS_NAMES_PATH,
-    DATA_DIR, DEVICE, IMG_SIZE, LR, NUM_EPOCHS, NUM_WORKERS,
+    DATA_DIR, DEVICE, IMG_SIZE, LR, NUM_EPOCHS, NUM_WORKERS, PROJECT_ROOT,
 )
 from .dataset import get_dataloaders
 from .model import get_model
@@ -104,6 +107,8 @@ def main():
     p.add_argument("--no-amp", action="store_true", help="disable mixed precision")
     p.add_argument("--resume", default=None, help="checkpoint path to resume weights/best from")
     p.add_argument("--start-epoch", type=int, default=1)
+    p.add_argument("--hard-weights", default=None,
+                   help="JSON of {relative_path: weight} from src.hard_mining")
     args = p.parse_args()
 
     set_seed(args.seed)
@@ -115,6 +120,25 @@ def main():
         args.data, batch_size=args.batch_size, num_workers=NUM_WORKERS,
         img_size=args.img_size, use_randaugment=args.randaugment)
     print(f"Classes ({len(class_names)}): {class_names}")
+
+    if args.hard_weights and Path(args.hard_weights).exists():
+        weights_map = json.loads(Path(args.hard_weights).read_text(encoding="utf-8"))
+        ds = train_loader.dataset
+        if hasattr(ds, "samples"):
+            weights = []
+            for path, _label in ds.samples:
+                try:
+                    key = Path(path).resolve().relative_to(PROJECT_ROOT).as_posix()
+                except ValueError:
+                    key = str(path)
+                weights.append(float(weights_map.get(key, 1.0)))
+            sampler = WeightedRandomSampler(weights, num_samples=len(weights), replacement=True)
+            train_loader = DataLoader(ds, batch_size=args.batch_size, sampler=sampler,
+                                      num_workers=NUM_WORKERS, pin_memory=True)
+            print(f"Hard-example sampling: min={min(weights):.2f} "
+                  f"max={max(weights):.2f} mean={float(np.mean(weights)):.2f}")
+        else:
+            print("Hard-weight sampling skipped (dataset has no .samples)")
 
     model = get_model(len(class_names), arch=args.arch).to(DEVICE)
     criterion = nn.CrossEntropyLoss(label_smoothing=args.label_smoothing)
