@@ -1,6 +1,6 @@
 # Slim CPU-only stack for Streamlit Community Cloud (free tier, 1GB RAM).
 # No torch / torchvision / ultralytics here — inference runs on onnxruntime.
-streamlit>=1.30
+streamlit>=1.55
 onnxruntime>=1.17
 numpy<2
 pillow>=10.0

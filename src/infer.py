@@ -2,6 +2,7 @@
 import argparse
 import json
 from collections import deque
+from functools import lru_cache
 
 import cv2
 import torch
@@ -14,8 +15,14 @@ from .model import get_model
 from torchvision import transforms
 
 
+@lru_cache(maxsize=None)
+def load_checkpoint(checkpoint, map_location=DEVICE):
+    """Read a checkpoint once per process — the GUI used to reload B3 three times."""
+    return torch.load(checkpoint, map_location=map_location, weights_only=True)
+
+
 def load_model(checkpoint=CHECKPOINT_PATH):
-    ckpt = torch.load(checkpoint, map_location=DEVICE, weights_only=False)
+    ckpt = load_checkpoint(str(checkpoint), DEVICE)
     classes = ckpt.get("classes") or ckpt.get("class_names")
     state_dict = ckpt.get("model_state") or ckpt.get("state_dict")
     if classes is None or state_dict is None:
@@ -30,7 +37,7 @@ def load_model(checkpoint=CHECKPOINT_PATH):
 
 def checkpoint_img_size(checkpoint=CHECKPOINT_PATH):
     """Read the training resolution stored in a checkpoint (default 224)."""
-    ckpt = torch.load(checkpoint, map_location="cpu", weights_only=False)
+    ckpt = load_checkpoint(str(checkpoint), "cpu")
     return int(ckpt.get("img_size", IMG_SIZE))
 
 

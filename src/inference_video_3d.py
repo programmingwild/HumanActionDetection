@@ -16,12 +16,13 @@ from torchvision import transforms
 
 from .config import CLIP_LEN, DEVICE, VIDEO_CHECKPOINT_PATH, VIDEO_IMG_SIZE
 from .dataset import IMAGENET_MEAN, IMAGENET_STD
+from .infer import load_checkpoint
 from .labels import pretty
 from .model_3d import get_video_model
 
 
 def load_video_model(checkpoint=VIDEO_CHECKPOINT_PATH):
-    ckpt = torch.load(checkpoint, map_location=DEVICE, weights_only=False)
+    ckpt = load_checkpoint(str(checkpoint), DEVICE)
     classes = ckpt.get("classes") or ckpt.get("class_names")
     state_dict = ckpt.get("model_state") or ckpt.get("state_dict")
     if classes is None or state_dict is None:

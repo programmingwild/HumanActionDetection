@@ -44,20 +44,35 @@ def organize_kth(src_dir, dest_dir=None):
 
 
 def read_frames_uniform(path, clip_len=CLIP_LEN):
+    """Sample `clip_len` frames evenly without decoding the whole clip into RAM."""
+    import numpy as np
+
     cap = cv2.VideoCapture(str(path))
+    if not cap.isOpened():
+        raise RuntimeError(f"Cannot open video: {path}")
+    count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
     frames = []
-    while True:
-        ok, fr = cap.read()
-        if not ok:
-            break
-        frames.append(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB))
+    if count > 0:
+        for i in np.linspace(0, count - 1, clip_len).astype(int):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, int(i))
+            ok, fr = cap.read()
+            if ok:
+                frames.append(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB))
+    else:  # some codecs do not report a frame count
+        while True:
+            ok, fr = cap.read()
+            if not ok:
+                break
+            frames.append(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB))
+        if frames:
+            idx = np.linspace(0, len(frames) - 1, clip_len).astype(int)
+            frames = [frames[i] for i in idx]
     cap.release()
     if not frames:
         raise RuntimeError(f"No frames: {path}")
-    # uniform sample (or tile if too short)
-    import numpy as np
-    idx = np.linspace(0, len(frames) - 1, clip_len).astype(int)
-    return [frames[i] for i in idx]
+    if len(frames) < clip_len:  # short clip — tile rather than crash
+        frames = (frames * ((clip_len // len(frames)) + 1))[:clip_len]
+    return frames
 
 
 class VideoClipDataset(Dataset):

@@ -1,7 +1,7 @@
 # Default (slim, CPU-only): Streamlit Cloud free tier + local CPU runs.
 # Torch-free inference via onnxruntime (~400MB RAM total).
 # For GPU training locally, use requirements-gpu.txt instead.
-streamlit>=1.30
+streamlit>=1.55
 onnxruntime>=1.17
 numpy<2
 pillow>=10.0
